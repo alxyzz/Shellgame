@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-
+    //what this one should do: let user move hand around in a limited area - no object interaction
     private static HandController _instance;
 
     public static HandController Instance
@@ -12,9 +12,6 @@ public class HandController : MonoBehaviour
             return _instance;
         }
     }
-
-
-
     void Awake()
     {
         if (_instance != null)
@@ -29,11 +26,56 @@ public class HandController : MonoBehaviour
 
 
     }
-    public GameObject boundaryleft, boundaryright, boundaryUp, boundaryDown;
-    public GameObject pickArea;
-    public float movespeedLeftRight = 2f;
-    public float movespeedFrontBack = 2f;
-    [HideInInspector]public bool hasLiftedEgg, hasLiftedEggHigh;//checks wether the hand was physically moved higher to crack the egg. or even higher for stronger eggs
+    public GameObject pickArea; 
+
+    [SerializeField] float lerpSpeed = 2f;
+    Vector3 startPos;
+    Vector3 target;
+    float lerpfactor;
+
+    //for now
+
+    public GameObject CrackPosition, PourPosition, BinPosition, PanPosition;
+
+    public void HandAnimate_Crack()
+    {
+        startPos = transform.position;
+        transform.position = CrackPosition.transform.position;
+        //target = CrackPosition.transform.position;
+    }
+
+    public void HandAnimate_Pour()
+    {
+        startPos = transform.position;
+        transform.position = PourPosition.transform.position;
+
+        //target = PourPosition.transform.position;
+    }
+
+
+    public void HandAnimate_Bin()
+    {
+        startPos = transform.position;
+        transform.position = BinPosition.transform.position;
+
+        //target = BinPosition.transform.position;
+    }
+
+    public void HandAnimate_Pan()
+    {
+        startPos = transform.position;
+        transform.position = PanPosition.transform.position;
+
+        //target = PanPosition.transform.position;
+    }
+
+
+    void Update()
+    {
+
+
+     
+    }
 
 
     // Start is called before the first frame update
@@ -45,42 +87,11 @@ public class HandController : MonoBehaviour
 
     void FixedUpdate()
     {
-        float translation = 0;
-        if (PlayManager.Instance.currentEgg == null)
-        {
-            translation = Input.GetAxis("Mouse Y") * movespeedFrontBack;
-
-        }
-        else if (PlayManager.Instance.currentEgg.floatsUp)
-        {
-            translation = 0.05f + Input.GetAxis("Mouse Y") * movespeedFrontBack;
-        }
-        else
-        {
-            translation = Input.GetAxis("Mouse Y") * movespeedFrontBack;
-
-        }
-
-
-
-        float rotation = Input.GetAxis("Mouse X") * movespeedLeftRight;
-
-        // Make it move 10 meters per second instead of 10 meters per frame...
-
-        Vector3 movement = new Vector3(Mathf.Clamp(
-            transform.position.x + rotation, boundaryleft.transform.position.x, boundaryright.transform.position.x),
-            Mathf.Clamp(transform.position.y + translation, boundaryDown.transform.position.y,
-            boundaryUp.transform.position.y),
-            transform.position.z);
-
-        transform.position = movement;
+        //if (target != null)
+        //{
+        //    transform.position = Vector3.Lerp(startPos, target, lerpfactor);
+        //    lerpfactor += lerpSpeed;
+        //}
+      
     }
-
-
-
-
-
-
-
-
 }

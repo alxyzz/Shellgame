@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,37 +8,41 @@ public enum Movement { crack, pour, none }
 /// </summary>
 public class Egg : MonoBehaviour
 {
-    public int crackAmt;
-    public int pourAmt;
-    public bool floatsUp;
-    
-     public string description;
-
-    public Egg()
+    public enum EggState
     {
-      crackAmt = 1;
-      pourAmt = 1;
-    description = "Just your regular, run-of-the-mill egg.";
+        Intact,//crack, pour
+        Rotten,//just dispose
+        Lifted,
+        Cracked,//can pour
+        Overcracked
     }
+    public EggState _state;
+    public int HITS_TO_CRACK; //how many times to crack
+    public bool FLOATING;//lifts itself
+    public bool TOUGH;//lift twice
+    public string DESC;
 
-    public bool CheckifValid()
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="high"> wether egg was lifted higher than usual</param>
+    public void Crack( bool lifted, bool high)
     {
-        if (crackAmt != 0 && pourAmt != 0)
+        
+
+
+    }
+    /// <summary>
+    /// returns wether you let it fall into the bowl by trying to pour when it's not cracked
+    /// </summary>
+    /// <returns></returns>
+    public bool  FinishEggCheckForMess()
+    {
+        if (_state == EggState.Cracked)
         {
             return false;
         }
-        return true;
-    }
-
-
-    public void Crack()
-    {
-        crackAmt--;
-    }
-
-    public void Pour()
-    {
-        pourAmt--;
+        return true; //if we let it fall into the  pan/bown
     }
 
 

@@ -28,9 +28,7 @@ public class GameManager : MonoBehaviour
     }
     #endregion
     #region References
-    [SerializeReference] PauseUI pause;
     [HideInInspector] public PlayManager pManager;
-    [SerializeReference] AudioSource soundMan;
 
     #endregion
     #region Variables
@@ -38,10 +36,8 @@ public class GameManager : MonoBehaviour
     List<Player> players = new();
 
     [SerializeField] public float timeToStart = 2;
-    [SerializeField] public  float processInterval = 0.7f;
-    [SerializeField] float c;
-    [SerializeField] float d;
-    public int Score = 0;
+    [Header("This is the time per each subdivision - a turn is two of these.")]
+    [SerializeField] public  float processInterval = 0.7f; 
 
     //settings
     [HideInInspector] public float musicVolume;
@@ -59,10 +55,10 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            TogglePauseMenu();
-        }
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    TogglePauseMenu();
+        //}
     }
 
     #endregion
@@ -72,10 +68,7 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    public void Win()
-    {
-        SceneManager.LoadScene(2);
-    }
+  
 
 
     public void GotoMenu()
@@ -85,23 +78,23 @@ public class GameManager : MonoBehaviour
 
     #endregion
     #region PauseMenu
-    public void TogglePauseMenu() 
-    {
+    //public void TogglePauseMenu() 
+    //{
 
-        if (pause.gameObject.activeInHierarchy)
-        {
-            Time.timeScale = 1f;
+    //    if (pause.gameObject.activeInHierarchy)
+    //    {
+    //        Time.timeScale = 1f;
 
-            pause.gameObject.SetActive(false);
-        }
-        else
-        {
-            Time.timeScale = 0f;
-            pause.gameObject.SetActive(true);
+    //        pause.gameObject.SetActive(false);
+    //    }
+    //    else
+    //    {
+    //        Time.timeScale = 0f;
+    //        pause.gameObject.SetActive(true);
 
-        }
+    //    }
 
-    }
+    //}
 
 
     #endregion
