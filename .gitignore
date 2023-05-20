@@ -60,7 +60,7 @@ crashlytics-build.properties
 
 UserSettings
 UserSettings/*
-Shellgame/UserSettings/
-Shellgame/Workflow/
-Shellgame/.vsconfig
-Shellgame/.idea/
+UserSettings/
+Workflow/
+.vsconfig
+.idea/
