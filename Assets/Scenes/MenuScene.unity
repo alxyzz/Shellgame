@@ -3582,13 +3582,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08494568044c1c848a47c37f6f4a678a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pause: {fileID: 0}
   pManager: {fileID: 0}
-  soundMan: {fileID: 0}
   timeToStart: 3
-  processInterval: 5
-  c: 0
-  d: 0
+  processInterval: 0.7
   Score: 0
   musicVolume: 0
   SFXvolume: 0

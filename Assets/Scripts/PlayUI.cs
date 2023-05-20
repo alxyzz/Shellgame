@@ -23,15 +23,12 @@ public class PlayUI  : MonoBehaviour
 
     public void OnClickPause()
     {
-        GameManager.Instance.TogglePauseMenu();
+       // GameManager.Instance.TogglePauseMenu();
     }
 
 
 
     //mirror all desired GameManager stuff here
 
-    public void Win()
-    {
-        GameManager.Instance.Win();
-    }
+
 }

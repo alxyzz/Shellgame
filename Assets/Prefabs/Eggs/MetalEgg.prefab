@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5323720290627367312}
   m_Layer: 0
   m_Name: MetalEgg
-  m_TagString: Untagged
+  m_TagString: egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5323720290627367313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.41008472, y: 5.165782, z: 4.9033947}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.32, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -112,4 +112,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crackAmt: 3
   pourAmt: 1
+  floatsUp: 0
   description: Metallic Egg. Crack three times.
