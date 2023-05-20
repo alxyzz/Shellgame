@@ -1878,8 +1878,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   currentEgg: {fileID: 0}
-  tickLabel: {fileID: 0}
-  eggRequirementList: {fileID: 0}
+  tickLabel: {fileID: 1770976975}
   PopUpAdvisor: {fileID: 2515918124158333349}
 --- !u!4 &1600104433
 Transform:
