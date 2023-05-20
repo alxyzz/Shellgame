@@ -15,7 +15,8 @@ public class PlayManager : MonoBehaviour
     #region References
 
     //states
-    float BPM = 60;
+    public float BPM;
+    public float offset;
     float sweet_spot = 0.5f;
     float BeatInterval;
     float SubBeatInterval;
@@ -33,18 +34,19 @@ public class PlayManager : MonoBehaviour
 
 
 
-    public void Initialise(AudioClip clip, int bpm)
+    public void Initialise(AudioClip clip, float bpm)
     {
         // AudioPlayer.Instance.player.clip = clip;
-        BPM = bpm;
-        BeatInterval = 60.0f / bpm;
-        SubBeatInterval = BeatInterval / 2;
+        ///bpm = BPM;
+        BeatInterval = 60.0f / BPM;
+        SubBeatInterval = BeatInterval / 4;
         BeatCount = 0;
        player.clip = beat;
 
         InvokeRepeating("EveryBeat", 0, BeatInterval);
-        InvokeRepeating("EverySubBeat", 0, SubBeatInterval);
-        InvokeRepeating("AfterSubBeat", 0, SubBeatInterval - Buffer);
+        InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
+        
+        ///InvokeRepeating("AfterSubBeat", 0, SubBeatInterval - Buffer);
     }
 
     void EveryBeat()
@@ -57,7 +59,7 @@ public class PlayManager : MonoBehaviour
     void EverySubBeat()
     {
         SubBeatCount++;
-        beatIndicator.enabled = false;
+        beatIndicator.enabled = !beatIndicator.enabled;
         Debug.Log("subBeat");
 
     }
@@ -66,7 +68,7 @@ public class PlayManager : MonoBehaviour
     {
         beatIndicator.enabled = true;
 
-        Debug.Log("subBeat");
+        Debug.Log("subBeatEnd");
 
     }
 
@@ -98,6 +100,18 @@ public class PlayManager : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (beatIndicator.enabled)
+            {
+                Debug.Log("you hit it!");
+            }
+            else
+            {
+                Debug.Log("you missed it...");
+            }
+        }
+
 
     }
 
