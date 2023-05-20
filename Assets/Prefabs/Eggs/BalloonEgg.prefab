@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ae9646301fc81ab45950a51912a55fb5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,7 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb78cce8b4317d4cbc5e2657958b162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crackAmt: 1
-  pourAmt: 1
-  floatsUp: 1
-  description: Just your regular, run-of-the-mill egg.
+  _state: 0
+  HITS_TO_CRACK: 1
+  TOUGH: 0
+  SHIELDED: 0
+  HEIGHT_LIFTED: 1
+  DESC: Helium-filled egg. Pre-raised. crack and enjoy.
+  ID: Balloon Egg

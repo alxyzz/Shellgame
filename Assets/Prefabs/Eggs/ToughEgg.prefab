@@ -110,7 +110,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb78cce8b4317d4cbc5e2657958b162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crackAmt: 2
-  pourAmt: 1
-  floatsUp: 0
-  description: A hardened egg. Crack twice.
+  _state: 0
+  HITS_TO_CRACK: 1
+  TOUGH: 1
+  SHIELDED: 0
+  HEIGHT_LIFTED: 0
+  DESC: This egg is quite tough. It must be shattered from double the height a regular
+    one requires.
+  ID: Tough Egg
