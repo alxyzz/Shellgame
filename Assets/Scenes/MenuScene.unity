@@ -3585,7 +3585,6 @@ MonoBehaviour:
   pManager: {fileID: 0}
   timeToStart: 3
   processInterval: 0.7
-  Score: 0
   musicVolume: 0
   SFXvolume: 0
 --- !u!1 &561530220
@@ -10066,15 +10065,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 737099515382567874, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.859837
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 737099515382567874, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.5468183
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 737099515382567874, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.4057068
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 737099515382567874, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10102,6 +10101,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 737099515382567874, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 737099515382567875, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
+      propertyPath: Priority
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 737099515382567875, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}
+      propertyPath: m_PlayOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 737099515382567885, guid: d33e4d3d3408a46498fc8567b8f50f69, type: 3}

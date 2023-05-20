@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4931947910235649803}
   - component: {fileID: 4931947910235649847}
   m_Layer: 0
-  m_Name: Egg
+  m_Name: Pre-CrackedEgg
   m_TagString: egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: a92b2dd1479bdab428eeb34a62c8e112, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -110,10 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb78cce8b4317d4cbc5e2657958b162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _state: 0
-  HITS_TO_CRACK: 1
+  _state: 2
+  HITS_TO_CRACK: 0
   TOUGH: 0
   SHIELDED: 0
   HEIGHT_LIFTED: 0
-  DESC: Just your regular, daily egg. Raise it, crack it, and into the pan.
-  ID: Egg
+  DESC: Pre-cracked egg.. Throw it in the pan.
+  ID: Egg Ready-To-Eat (ERE)

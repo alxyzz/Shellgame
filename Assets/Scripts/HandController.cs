@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class HandController : MonoBehaviour
@@ -26,7 +27,7 @@ public class HandController : MonoBehaviour
 
 
     }
-    public GameObject pickArea; 
+
 
     [SerializeField] float lerpSpeed = 2f;
     Vector3 startPos;
@@ -35,19 +36,39 @@ public class HandController : MonoBehaviour
 
     //for now
 
-    public GameObject CrackPosition, PourPosition, BinPosition, PanPosition;
+    public GameObject pos_crack, pos_raise, pos_raise2, pos_garbage, pos_pan;
+    public GameObject THE_HAND;
 
-    public void HandAnimate_Crack()
+     Vector3 OrigPos;
+    void Move(GameObject a, GameObject b)
     {
-        startPos = transform.position;
-        transform.position = CrackPosition.transform.position;
-        //target = CrackPosition.transform.position;
+        StopAllCoroutines();
+        a.transform.position = b.transform.position;
+        StartCoroutine(returnToRestingPlace());
+
     }
 
-    public void HandAnimate_Pour()
+
+    IEnumerator returnToRestingPlace()
     {
-        startPos = transform.position;
-        transform.position = PourPosition.transform.position;
+        yield return new WaitForSecondsRealtime(0.4f);
+
+        THE_HAND.transform.position = startPos;
+
+
+    }
+    public void HandAnimate_Crack()
+    {
+        Move(THE_HAND, pos_crack);
+        //target = CrackPosition.transform.position;
+
+        //animate here later
+    }
+
+    public void HandAnimate_Raise()
+    {
+        Move(THE_HAND, pos_raise);
+
 
         //target = PourPosition.transform.position;
     }
@@ -55,43 +76,31 @@ public class HandController : MonoBehaviour
 
     public void HandAnimate_Bin()
     {
-        startPos = transform.position;
-        transform.position = BinPosition.transform.position;
+        Move(THE_HAND, pos_garbage);
+
 
         //target = BinPosition.transform.position;
     }
 
     public void HandAnimate_Pan()
     {
-        startPos = transform.position;
-        transform.position = PanPosition.transform.position;
-
+        Move(THE_HAND, pos_pan);
         //target = PanPosition.transform.position;
     }
 
 
-    void Update()
-    {
-
-
-     
-    }
 
 
     // Start is called before the first frame update
     void Start()
     {
+        startPos = THE_HAND.transform.position;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void FixedUpdate()
     {
-        //if (target != null)
-        //{
-        //    transform.position = Vector3.Lerp(startPos, target, lerpfactor);
-        //    lerpfactor += lerpSpeed;
-        //}
       
     }
 }

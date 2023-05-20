@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4931947910235649803}
   - component: {fileID: 4931947910235649847}
   m_Layer: 0
-  m_Name: Egg
+  m_Name: ShieldedEgg
   m_TagString: egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: d3b8c99a38c9c394db9d0065eb476a30, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   _state: 0
   HITS_TO_CRACK: 1
   TOUGH: 0
-  SHIELDED: 0
+  SHIELDED: 1
   HEIGHT_LIFTED: 0
-  DESC: Just your regular, daily egg. Raise it, crack it, and into the pan.
-  ID: Egg
+  DESC: This egg has been shielded. <br> The shield protects against one cracking.
+  ID: Hi-Tech Egg

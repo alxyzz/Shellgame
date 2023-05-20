@@ -110,7 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb78cce8b4317d4cbc5e2657958b162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crackAmt: 0
-  pourAmt: 0
-  floatsUp: 0
-  description: A rotten egg. Will ruin your omelette.
+  _state: 1
+  HITS_TO_CRACK: 1
+  TOUGH: 0
+  SHIELDED: 0
+  HEIGHT_LIFTED: 0
+  DESC: This is one rotten egg. No place for it in your omelette.
+  ID: Rotten Egg
