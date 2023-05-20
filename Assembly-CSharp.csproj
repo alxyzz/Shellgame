@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\PauseUI.cs" />
     <Compile Include="Assets\Scripts\MenuUI.cs" />
     <Compile Include="Assets\Scripts\PlayManager.cs" />
+    <Compile Include="Assets\HandGrabZone.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

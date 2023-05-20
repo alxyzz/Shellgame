@@ -25,7 +25,7 @@ public List<Egg> allEggs = new();
     void Awake()
     {
 
-        GameManager.Instance.pManager = this;
+        //GameManager.Instance.pManager = this;
     }
 
     void Start()
@@ -187,7 +187,6 @@ public List<Egg> allEggs = new();
     void ShowPlayerWasWrong()
     {
         PopUpAdvisor.Appear("Wrong combo!");
-        wrongness.SetActive(true); 
     }
 
     IEnumerator delayedStart()
