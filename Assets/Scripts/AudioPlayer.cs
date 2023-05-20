@@ -12,7 +12,7 @@ public class AudioPlayer : MonoBehaviour
     public AudioSource player;
 
 
-void Awake()
+    void Awake()
     {
         if (_instance != null)
         {
