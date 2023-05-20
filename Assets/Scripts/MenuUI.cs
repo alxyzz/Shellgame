@@ -29,6 +29,10 @@ public class MenuUI : MonoBehaviour
         Application.Quit();
     }
 
+    public void OnClickControls()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
+    }
 
 
 
