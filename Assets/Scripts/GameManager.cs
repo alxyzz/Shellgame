@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     List<Player> players = new();
 
-    [SerializeField] public float timeToStart;
+    [SerializeField] public float timeToStart = 2;
     [SerializeField] public  float processInterval = 0.7f;
     [SerializeField] float c;
     [SerializeField] float d;
