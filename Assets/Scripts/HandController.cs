@@ -1,8 +1,9 @@
+using System.Collections;
 using UnityEngine;
 
 public class HandController : MonoBehaviour
 {
-
+    //what this one should do: let user move hand around in a limited area - no object interaction
     private static HandController _instance;
 
     public static HandController Instance
@@ -12,9 +13,6 @@ public class HandController : MonoBehaviour
             return _instance;
         }
     }
-
-
-
     void Awake()
     {
         if (_instance != null)
@@ -29,58 +27,80 @@ public class HandController : MonoBehaviour
 
 
     }
-    public GameObject boundaryleft, boundaryright, boundaryUp, boundaryDown;
-    public GameObject pickArea;
-    public float movespeedLeftRight = 2f;
-    public float movespeedFrontBack = 2f;
-    [HideInInspector]public bool hasLiftedEgg, hasLiftedEggHigh;//checks wether the hand was physically moved higher to crack the egg. or even higher for stronger eggs
+
+
+    [SerializeField] float lerpSpeed = 2f;
+    Vector3 startPos;
+    Vector3 target;
+    float lerpfactor;
+
+    //for now
+
+    public GameObject pos_crack, pos_raise, pos_raise2, pos_garbage, pos_pan;
+    public GameObject THE_HAND;
+
+     Vector3 OrigPos;
+    void Move(GameObject a, GameObject b)
+    {
+        StopAllCoroutines();
+        a.transform.position = b.transform.position;
+        StartCoroutine(returnToRestingPlace());
+
+    }
+
+
+    IEnumerator returnToRestingPlace()
+    {
+        yield return new WaitForSecondsRealtime(0.4f);
+
+        THE_HAND.transform.position = startPos;
+
+
+    }
+    public void HandAnimate_Crack()
+    {
+        Move(THE_HAND, pos_crack);
+        //target = CrackPosition.transform.position;
+
+        //animate here later
+    }
+
+    public void HandAnimate_Raise()
+    {
+        Move(THE_HAND, pos_raise);
+
+
+        //target = PourPosition.transform.position;
+    }
+
+
+    public void HandAnimate_Bin()
+    {
+        Move(THE_HAND, pos_garbage);
+
+
+        //target = BinPosition.transform.position;
+    }
+
+    public void HandAnimate_Pan()
+    {
+        Move(THE_HAND, pos_pan);
+        //target = PanPosition.transform.position;
+    }
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
+        startPos = THE_HAND.transform.position;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     void FixedUpdate()
     {
-        float translation = 0;
-        if (PlayManager.Instance.currentEgg == null)
-        {
-            translation = Input.GetAxis("Mouse Y") * movespeedFrontBack;
-
-        }
-        else if (PlayManager.Instance.currentEgg.floatsUp)
-        {
-            translation = 0.05f + Input.GetAxis("Mouse Y") * movespeedFrontBack;
-        }
-        else
-        {
-            translation = Input.GetAxis("Mouse Y") * movespeedFrontBack;
-
-        }
-
-
-
-        float rotation = Input.GetAxis("Mouse X") * movespeedLeftRight;
-
-        // Make it move 10 meters per second instead of 10 meters per frame...
-
-        Vector3 movement = new Vector3(Mathf.Clamp(
-            transform.position.x + rotation, boundaryleft.transform.position.x, boundaryright.transform.position.x),
-            Mathf.Clamp(transform.position.y + translation, boundaryDown.transform.position.y,
-            boundaryUp.transform.position.y),
-            transform.position.z);
-
-        transform.position = movement;
+      
     }
-
-
-
-
-
-
-
-
 }

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4684501884068477922}
   m_Layer: 0
   m_Name: RottenEgg
-  m_TagString: Untagged
+  m_TagString: egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4684501884068477923}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.41008472, y: 5.165782, z: 4.9033947}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1.32, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -110,6 +110,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6eb78cce8b4317d4cbc5e2657958b162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  crackAmt: 0
-  pourAmt: 0
-  description: A rotten egg. Will ruin your omelette.
+  _state: 1
+  HITS_TO_CRACK: 1
+  TOUGH: 0
+  SHIELDED: 0
+  HEIGHT_LIFTED: 0
+  DESC: This is one rotten egg. No place for it in your omelette.
+  ID: Rotten Egg
