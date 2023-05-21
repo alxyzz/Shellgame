@@ -16,7 +16,7 @@ public class EndingUI : MonoBehaviour
     void DoGeneralEndingStuff()
     {
 
-        
+        Debug.Log("DoGeneralEndingStuff() ran");
         foreach (var item in allOtherSound)
         {
             item.mute = true;

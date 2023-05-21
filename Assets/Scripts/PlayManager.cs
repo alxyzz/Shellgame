@@ -32,7 +32,51 @@ public class PlayManager : MonoBehaviour
     public int eggShells;
 
 
-    [SerializeField] public PopUp tooltip;
+    [SerializeField]  GameObject PopUp_Correct, PopUp_Crack, PopUp_Raise, PopUp_Wrong, popUpSpawnArea;
+
+    IEnumerator PopUpObject(GameObject b)
+    {
+
+        Vector3 origVector = b.transform.localScale;
+        for (int i = 0; i < 60; i++)
+        {
+            b.transform.localScale = new Vector3(origVector.x + (i * 0.02f), origVector.y + (i * 0.02f), origVector.z + (i * 0.02f));
+            yield return new WaitForSecondsRealtime(0.00002f);
+        }
+
+        for (int i = 60; i > 0; i--)
+        {
+            b.transform.localScale = new Vector3(origVector.x + (i * 0.02f), origVector.y + (i * 0.02f), origVector.z + (i * 0.02f));
+            yield return new WaitForSecondsRealtime(0.00005f);
+        }
+        b.transform.localScale = origVector;
+        
+        Destroy(b);
+
+    }
+
+
+
+    public void PopUpCorrect()
+    {
+        StartCoroutine(PopUpObject(Instantiate(PopUp_Correct, popUpSpawnArea.transform)));
+    }
+
+    public void PopUpCrack()
+    {
+        StartCoroutine(PopUpObject(Instantiate(PopUp_Crack, popUpSpawnArea.transform)));
+    }
+
+    public void PopUpRaise()
+    {
+        StartCoroutine(PopUpObject(Instantiate(PopUp_Raise, popUpSpawnArea.transform)));
+    }
+    public void PopUpWrong()
+    {
+        StartCoroutine(PopUpObject(Instantiate(PopUp_Wrong, popUpSpawnArea.transform)));
+    }
+
+
 
     //beat states
     public float BPM = 120;
@@ -59,10 +103,8 @@ public class PlayManager : MonoBehaviour
     [SerializeReference] TextMeshProUGUI txt_eggsCracked;
     [SerializeReference] Image left, right, top, down;
 
-    [SerializeReference] TextMeshProUGUI txt_eggDesc;
-    [SerializeReference] TextMeshProUGUI txt_eggName;
+    
 
-    [SerializeReference] GameObject BadEnding, GoodEnding, RottenEnding, CrunchyEnding;
 
 
 
@@ -105,7 +147,7 @@ public class PlayManager : MonoBehaviour
             if (canMove && !hasMoved)
             {
                 hasMoved = true;
-                Debug.Log("you hit it!");
+                //Debug.Log("you hit it!");
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(left, Color.green);
                 eggy.Garbage();
@@ -117,7 +159,7 @@ public class PlayManager : MonoBehaviour
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(left, Color.red);
 
-                Debug.Log("[Garbage]you missed it...");
+                //Debug.Log("[Garbage]you missed it...");
             }
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
@@ -125,7 +167,7 @@ public class PlayManager : MonoBehaviour
             if (canMove && !hasMoved)
             {
                 hasMoved = true;
-                Debug.Log("you hit it!");
+                //Debug.Log("you hit it!");
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(right, Color.green);
                 eggy.Pan();
@@ -137,7 +179,7 @@ public class PlayManager : MonoBehaviour
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(right, Color.red);
 
-                Debug.Log("[Pan] you missed it...");
+                //Debug.Log("[Pan] you missed it...");
             }
         }
         if (Input.GetKeyDown(KeyCode.UpArrow))
@@ -145,7 +187,7 @@ public class PlayManager : MonoBehaviour
             if (canMove && !hasMoved)
             {
                 hasMoved = true;
-                Debug.Log("you hit it!");
+                //Debug.Log("you hit it!");
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(top, Color.green);
 
@@ -157,7 +199,7 @@ public class PlayManager : MonoBehaviour
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(top, Color.red);
 
-                Debug.Log("[Raise]you missed it...");
+                //Debug.Log("[Raise]you missed it...");
             }
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -165,7 +207,7 @@ public class PlayManager : MonoBehaviour
             if (canMove && !hasMoved)
             {
                 hasMoved = true;
-                Debug.Log("you hit it!");
+                //Debug.Log("you hit it!");
                 eggy.Crack();
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(down, Color.green);
@@ -176,7 +218,7 @@ public class PlayManager : MonoBehaviour
             {
                 StopCoroutine("DelayedRecolor");
                 DelayedRecolor(down, Color.red);
-                Debug.Log("[Crack]you missed it...");
+                //Debug.Log("[Crack]you missed it...");
             }
         }
 
@@ -192,6 +234,7 @@ public class PlayManager : MonoBehaviour
    public void StartGame()
     {
 
+        
         Initialise(null, 60);
     }
 
@@ -223,8 +266,7 @@ public class PlayManager : MonoBehaviour
         InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
         pannedEgg = false;
         eggy.GetNewEgg();
-        txt_eggName.text = eggy.currentEgg.ID;
-        txt_eggDesc.text = eggy.currentEgg.DESC;
+      
         hasMoved = true;
         
 
@@ -263,8 +305,7 @@ public class PlayManager : MonoBehaviour
 
             pannedEgg = false;
             eggy.GetNewEgg();
-            txt_eggName.text = eggy.currentEgg.ID;
-            txt_eggDesc.text = eggy.currentEgg.DESC;
+            
 
             hasMoved = true;
         }

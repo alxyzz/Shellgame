@@ -8,6 +8,8 @@ public class MenuUI : MonoBehaviour
 
 
 
+    [SerializeReference] AudioSource menuMusic;
+    [SerializeReference] AudioClip menuMusicClip;
     [SerializeReference] PlayManager play;
     [SerializeReference] GameObject credits, howtoplay, PlayCanvas, endings;
     [SerializeReference]  List<GameObject> playObjects = new(); //hide these when start, show when playing
@@ -25,17 +27,22 @@ public class MenuUI : MonoBehaviour
         {
             item.SetActive(false);
         }
+        menuMusic.clip = menuMusicClip;
+        menuMusic.loop = true;
+        menuMusic.Play();
     }
 
 
     void StartGame()
     {
+        menuMusic.Stop();
         foreach (var item in playObjects)
         { //just so we dont have to deactivate them all the time in the editor
             item.SetActive(true);
         }
         endings.SetActive(false);
         PlayCanvas.SetActive(true);
+        
         play.StartGame();
         gameObject.SetActive(false);
     }

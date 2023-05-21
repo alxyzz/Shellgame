@@ -19,16 +19,7 @@ public class EggManager : MonoBehaviour
     public void GetNewEgg()
     {
 
-        Debug.Log("Just created a new egg.");
         currentEgg = Instantiate(eggPrefabs[Random.Range(0, eggPrefabs.Count)], eggSpawnerObject.transform).GetComponent<Egg>();
-        PlayManager.Instance.tooltip.Appear(currentEgg.ID + " is your new egg!");
-
-        //currentEgg = Instantiate(eggPrefabs[Random.Range(0, eggPrefabs.Count)]).GetComponent<Egg>();
-
-        //currentEgg.transform.SetParent(eggSpawnerObject.transform);
-        //currentEgg.transform.position = Vector3.zero;
-
-
 
     }
 
@@ -61,41 +52,22 @@ public class EggManager : MonoBehaviour
         switch (currentEgg._state)
         {
             case Egg.EggState.Intact:
-        PlayManager.Instance.tooltip.Appear(currentEgg.ID + " was thrown in the sizzling pan whole!");
-                break;
-            case Egg.EggState.Rotten:
-        PlayManager.Instance.tooltip.Appear(currentEgg.ID + " is contaminating the omelette now!");
-                break;
-            case Egg.EggState.Cracked:
-        PlayManager.Instance.tooltip.Appear(currentEgg.ID + " is sizzling deliciously in the pan.");
-                break;
-            case Egg.EggState.Shattered:
-        PlayManager.Instance.tooltip.Appear("Shards of " +currentEgg.ID+" await your tongue in the omelette.");
-                break;
-            default:
-                break;
-        }
-
-
-        switch (currentEgg._state)
-        {
-            case Egg.EggState.Intact:
                 PlayManager.Instance.eggShells += 1;
                 PlayManager.Instance.eggsCracked++;
-
+                PlayManager.Instance.PopUpWrong();
                 break;
             case Egg.EggState.Rotten:
                 PlayManager.Instance.eggsCracked++;
                 player.PlayOneShot(RottenEggSound);
-                PlayManager.Instance.usedRotten = true; break;
+                PlayManager.Instance.PopUpWrong(); PlayManager.Instance.usedRotten = true; break;
             case Egg.EggState.Cracked:
                 PlayManager.Instance.eggsCracked++;
-
+                PlayManager.Instance.PopUpCorrect();
                 break;
             case Egg.EggState.Shattered:
                 PlayManager.Instance.eggsCracked++;
                 PlayManager.Instance.eggShells += 1;
-
+                PlayManager.Instance.PopUpWrong();
                 break;
             default:
                 break;
@@ -116,7 +88,7 @@ public class EggManager : MonoBehaviour
         
 
         player.PlayOneShot(EggLiftSound);
-        PlayManager.Instance.tooltip.Appear(currentEgg.Raise());
+        PlayManager.Instance.PopUpRaise();
        
     }
     public void Garbage()
@@ -125,7 +97,12 @@ public class EggManager : MonoBehaviour
         {
             return;
         }
-        PlayManager.Instance.tooltip.Appear(currentEgg.ID + " was thrown in the trash!");
+        if (currentEgg._state == Egg.EggState.Rotten)
+        {
+            PlayManager.Instance.PopUpCorrect();
+
+        }
+       // PlayManager.Instance.PopUpWrong();
         HandController.Instance.HandAnimate_Bin();
         player.PlayOneShot(GarbageSound);
 
@@ -144,19 +121,19 @@ public class EggManager : MonoBehaviour
             {
                 case Egg.EggState.Intact:
                     IntactEggFeedback();
-                    PlayManager.Instance.tooltip.Appear(currentEgg.ID + " is hit, but is intact!");
+                    PlayManager.Instance.PopUpWrong();
                     break;
                 case Egg.EggState.Rotten:
-                    PlayManager.Instance.tooltip.Appear(currentEgg.ID + " was cracked! Gribbly juices spew out on the kitchen table.");
+                    PlayManager.Instance.PopUpWrong();
                     RottenEggFeedback();
                     break;
                 case Egg.EggState.Cracked:
-                    PlayManager.Instance.tooltip.Appear(currentEgg.ID + " was cracked!");
+                    PlayManager.Instance.PopUpCrack();
                     CrackEggFeedback();
                     //play crack sound
                     break;
                 case Egg.EggState.Shattered:
-                    PlayManager.Instance.tooltip.Appear(currentEgg.ID + " was obliterated into eggshell!");
+                    PlayManager.Instance.PopUpWrong();
                     ShatterEggFeedback();
                     //play loud crack sound
                     break;
