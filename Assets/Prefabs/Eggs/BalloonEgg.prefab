@@ -112,7 +112,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _state: 0
   HITS_TO_CRACK: 1
+  tooltip1: gotta lift tough eggs twice
   TOUGH: 0
+  tooltip2: gotta crack tough eggs twice
   SHIELDED: 0
   HEIGHT_LIFTED: 1
   DESC: Helium-filled egg. Pre-raised. crack and enjoy.
