@@ -23,6 +23,9 @@ public class CookAnimationManager : MonoBehaviour
     public Transform BottomShell;
     public Transform Head;
 
+    public UnityEvent onPanRaise;
+    public UnityEvent onPanLower;
+    
     private CookAnimationState _state;
 
     public CookAnimationState State => _state;
@@ -67,13 +70,16 @@ public class CookAnimationManager : MonoBehaviour
     public void RaisePan()
     {
         if (_state is not CookAnimationState.Idle) return;
+        if (_state is CookAnimationState.Menu) return;
         _state = CookAnimationState.Menu;
+        onPanRaise.Invoke();
         animator.SetBool("ShowMenu", true);
     }
     public void LowerPan()
     {
         if (_state is not CookAnimationState.Menu) return;
         _state = CookAnimationState.Idle;
+        onPanLower.Invoke();
         animator.SetBool("ShowMenu", false);
     }
 
