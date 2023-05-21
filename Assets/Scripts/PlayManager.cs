@@ -101,7 +101,6 @@ public class PlayManager : MonoBehaviour
     [SerializeReference] EggManager eggy;
     [SerializeReference] TextMeshProUGUI txt_eggshells;
     [SerializeReference] TextMeshProUGUI txt_eggsCracked;
-    [SerializeReference] Image left, right, top, down;
 
     
 
@@ -148,17 +147,13 @@ public class PlayManager : MonoBehaviour
             {
                 hasMoved = true;
                 //Debug.Log("you hit it!");
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(left, Color.green);
+                
                 eggy.Garbage();
 
                 return;
             }
             else
             {
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(left, Color.red);
-
                 //Debug.Log("[Garbage]you missed it...");
             }
         }
@@ -168,16 +163,14 @@ public class PlayManager : MonoBehaviour
             {
                 hasMoved = true;
                 //Debug.Log("you hit it!");
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(right, Color.green);
+                
                 eggy.Pan();
                 pannedEgg = true;
                 return;
             }
             else
             {
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(right, Color.red);
+                
 
                 //Debug.Log("[Pan] you missed it...");
             }
@@ -188,16 +181,14 @@ public class PlayManager : MonoBehaviour
             {
                 hasMoved = true;
                 //Debug.Log("you hit it!");
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(top, Color.green);
+                
 
                 eggy.Raise();
                 return;
             }
             else
             {
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(top, Color.red);
+                
 
                 //Debug.Log("[Raise]you missed it...");
             }
@@ -209,15 +200,13 @@ public class PlayManager : MonoBehaviour
                 hasMoved = true;
                 //Debug.Log("you hit it!");
                 eggy.Crack();
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(down, Color.green);
+               
 
                 return;
             }
             else
             {
-                StopCoroutine("DelayedRecolor");
-                DelayedRecolor(down, Color.red);
+                
                 //Debug.Log("[Crack]you missed it...");
             }
         }
@@ -261,7 +250,10 @@ public class PlayManager : MonoBehaviour
         BeatCount = 0;
         player.clip = beat;
         _playing = true;
-   
+        foreach (var item in beatCycleIndicator)
+        {
+            item.enabled = false;
+        }
         InvokeRepeating("EveryBeat", 0, BeatInterval);
         InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
         pannedEgg = false;

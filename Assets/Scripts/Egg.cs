@@ -18,7 +18,9 @@ public class Egg : MonoBehaviour
 
     public EggState _state;
     public int HITS_TO_CRACK; //how many times to crack
+    public string tooltip1 = "gotta lift tough eggs twice"; //how many times to crack
     public bool TOUGH;//lift twice
+    public string tooltip2 = "gotta crack tough eggs twice";
     public bool SHIELDED;//crack twice
     public int HEIGHT_LIFTED; //0, 1 or 2
     public string DESC;
@@ -32,9 +34,13 @@ public class Egg : MonoBehaviour
     {
         if (SHIELDED)
         {
-            SHIELDED = false;
-            HEIGHT_LIFTED = 0;
-            return EggState.Intact;
+            if (HEIGHT_LIFTED > 0)
+            {
+                SHIELDED = false;
+                HEIGHT_LIFTED = 0;
+                return EggState.Intact;
+            }
+          
         }
 
         if (TOUGH)
