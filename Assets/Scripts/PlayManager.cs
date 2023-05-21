@@ -52,6 +52,7 @@ public class PlayManager : MonoBehaviour
     [SerializeReference] List<Image> beatCycleIndicator = new();
     [SerializeReference] Image beatIndicator;
     [SerializeReference] AudioClip beat;
+    [SerializeReference] EndingUI endingUI;
     [SerializeReference] AudioSource player;
     [SerializeReference] EggManager eggy;
     [SerializeReference] TextMeshProUGUI txt_eggshells;
@@ -287,25 +288,26 @@ public class PlayManager : MonoBehaviour
         if (eggsCracked >= 15)
         {
             CancelInvoke();
-
+            _playing = false;
             if (usedRotten)
             {
-                ShowEnding(RottenEnding);
+                endingUI.DoRottenEnding();
+               
                 return;
             }
             if (eggShells == 0)
             {
-                ShowEnding(GoodEnding);
+                endingUI.DoGoodEnding();
                 return;
             }
             if (eggShells < 4)
             {
-                ShowEnding(CrunchyEnding);
+                endingUI.DoCrunchyENding();
                 return;
             }
             if (eggShells > 4)
             {
-                ShowEnding(BadEnding);
+                endingUI.DoVeryCrunchyEnding();
                 return;
             }
 
