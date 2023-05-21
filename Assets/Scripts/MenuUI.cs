@@ -11,6 +11,7 @@ public class MenuUI : MonoBehaviour
     bool diff;
     [SerializeReference] Material skyboxeasteregg;
     Material regular;
+    [SerializeReference]AudioPlayer b;
 
     void Start()
     {
@@ -19,10 +20,12 @@ public class MenuUI : MonoBehaviour
 
     public void OnClickLogo()
     {
+        Debug.Log("click");
+        b.PlayEggcrack();
         logoClicked++;
-        if (logoClicked > 15)
+        if (logoClicked > 6)
         {
-            if (diff)
+            if (!diff)
             {
                 RenderSettings.skybox = skyboxeasteregg;
                 
