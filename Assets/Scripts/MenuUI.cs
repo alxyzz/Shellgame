@@ -31,7 +31,13 @@ public class MenuUI : MonoBehaviour
         menuMusic.loop = true;
         menuMusic.Play();
     }
-
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartGame();
+        }
+    }
 
     void StartGame()
     {

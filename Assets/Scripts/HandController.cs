@@ -40,7 +40,7 @@ public class HandController : MonoBehaviour
     public GameObject THE_HAND;
 
      Vector3 OrigPos;
-    void Move(GameObject a, GameObject b)
+    void AnimateCookHand(GameObject a, GameObject b)
     {
         StopAllCoroutines();
         a.transform.position = b.transform.position;
@@ -59,15 +59,13 @@ public class HandController : MonoBehaviour
     }
     public void HandAnimate_Crack()
     {
-        Move(THE_HAND, pos_crack);
-        //target = CrackPosition.transform.position;
-
-        //animate here later
+        AnimateCookHand(THE_HAND, pos_crack);
+        
     }
 
     public void HandAnimate_Raise()
     {
-        Move(THE_HAND, pos_raise);
+        AnimateCookHand(THE_HAND, pos_raise);
 
 
         //target = PourPosition.transform.position;
@@ -76,7 +74,7 @@ public class HandController : MonoBehaviour
 
     public void HandAnimate_Bin()
     {
-        Move(THE_HAND, pos_garbage);
+        AnimateCookHand(THE_HAND, pos_garbage);
 
 
         //target = BinPosition.transform.position;
@@ -84,19 +82,15 @@ public class HandController : MonoBehaviour
 
     public void HandAnimate_Pan()
     {
-        Move(THE_HAND, pos_pan);
+        AnimateCookHand(THE_HAND, pos_pan);
         //target = PanPosition.transform.position;
     }
-
-
-
 
     // Start is called before the first frame update
     void Start()
     {
-        startPos = THE_HAND.transform.position;
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+       
+      
     }
 
     void FixedUpdate()
