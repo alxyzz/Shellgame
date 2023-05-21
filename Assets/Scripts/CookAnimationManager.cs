@@ -11,6 +11,7 @@ public class CookAnimationManager : MonoBehaviour
     public Transform Egg;
     public Transform TopShell;
     public Transform BottomShell;
+    public Transform Head;
 
     public void Idle()
     {
@@ -47,6 +48,7 @@ public class CookAnimationManager : MonoBehaviour
     {
         Gizmos.color = new (1,1,.8f);
         Gizmos.DrawWireSphere(Egg.position, .05f);
+        Gizmos.DrawWireCube(Head.position, Vector3.one * 0.1f);
     }
     
     #endif
