@@ -13,6 +13,13 @@ public class CookAnimationManager : MonoBehaviour
     public Transform BottomShell;
     public Transform Head;
 
+
+    void Start()
+    {
+
+    }
+
+
     public void Idle()
     {
         animator.SetTrigger("Idle");
