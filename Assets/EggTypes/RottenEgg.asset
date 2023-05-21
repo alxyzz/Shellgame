@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37ca6e6aa27e9ae46b348230f84a1aab, type: 3}
   m_Name: RottenEgg
   m_EditorClassIdentifier: 
-  isRotten: 0
-  raises: 0
-  smacks: 0
+  isRotten: 1
+  raises: 1
+  smacks: 1

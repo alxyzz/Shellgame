@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: HardEgg
   m_EditorClassIdentifier: 
   isRotten: 0
-  raises: 0
-  smacks: 0
+  raises: 2
+  smacks: 1

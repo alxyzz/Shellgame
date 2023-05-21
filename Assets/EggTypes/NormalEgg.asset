@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: NormalEgg
   m_EditorClassIdentifier: 
   isRotten: 0
-  raises: 0
-  smacks: 0
+  raises: 1
+  smacks: 1
