@@ -17,6 +17,15 @@ public class PlayManager : MonoBehaviour
 
     #region References
 
+    bool _playing;
+    public bool IsPlaying
+    {
+        get
+        {
+            return _playing;
+        }
+    }
+
     //eggy states
     [HideInInspector] public int eggsCracked;
     [HideInInspector] public bool usedRotten;
@@ -32,7 +41,6 @@ public class PlayManager : MonoBehaviour
     float BeatInterval;
     float SubBeatInterval;
     bool canMove = true;
-    float timeElapsed;
     float BeatCount;
     int BeatsInThisCycle;
     float SubBeatCount;
@@ -57,121 +65,7 @@ public class PlayManager : MonoBehaviour
 
 
 
-    void ShowEnding(GameObject b)
-    {
-
-        b.SetActive(true);
-
-    }
-
-
-
-
-
-
-    public void Initialise(AudioClip clip, float bpm)
-    {
-        // AudioPlayer.Instance.player.clip = clip;
-        ///bpm = BPM;
-        BeatInterval = 60.0f / BPM/2;
-        SubBeatInterval = BeatInterval / 2;
-        BeatCount = 0;
-        player.clip = beat;
-
-        InvokeRepeating("EveryBeat", 0, BeatInterval);
-        InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
-        pannedEgg = false;
-        eggy.GetNewEgg();
-        txt_eggName.text = eggy.currentEgg.ID;
-        txt_eggDesc.text = eggy.currentEgg.DESC;
-        hasMoved = true;
-
-
-        ///InvokeRepeating("AfterSubBeat", 0, SubBeatInterval - Buffer);
-    }
-
-    IEnumerator DelayedRecolor(Image b, Color d)
-    {
-
-        b.color = d;
-        yield return new WaitForSecondsRealtime(0.2f);
-        b.color = Color.white;
-    }
-
-    void EveryBeat()
-    {
-        beatCycleIndicator[BeatsInThisCycle].enabled = true;
-        hasMoved = false;
-        player.Play();
-        BeatCount++;
-        BeatsInThisCycle++;
-
-        if (BeatsInThisCycle > beatsInCycle)
-        {
-            foreach (var item in beatCycleIndicator)
-            {
-                item.enabled = false;
-            }
-            BeatsInThisCycle = 0;
-            //throw egg in pan
-            if (!pannedEgg)
-            {
-                eggy.Pan();
-            }
-            
-
-            pannedEgg = false;
-            eggy.GetNewEgg();
-            txt_eggName.text = eggy.currentEgg.ID;
-            txt_eggDesc.text = eggy.currentEgg.DESC;
-
-            hasMoved = true;
-        }
-        CheckVictoryCondition();
-        //Debug.Log("beat");
-    }
-
-    void EverySubBeat()
-    {
-        SubBeatCount++;
-        canMove = !canMove;
-        beatIndicator.gameObject.SetActive(!beatIndicator.gameObject.activeInHierarchy);
-        // Debug.Log("subBeat");
-
-    }
-
-
-
-    void CheckVictoryCondition()
-    {
-        if (eggsCracked >= 15)
-        {
-            CancelInvoke();
-
-            if (usedRotten)
-            {
-                ShowEnding(RottenEnding);
-                return;
-            }
-            if (eggShells == 0)
-            {
-                ShowEnding(GoodEnding);
-                return;
-            }
-            if (eggShells < 4)
-            {
-                ShowEnding(CrunchyEnding);
-                return;
-            }
-            if (eggShells > 4)
-            {
-                ShowEnding(BadEnding);
-                return;
-            }
-
-        }
-    }
-
+  
 
     #endregion
     #region Variables
@@ -198,7 +92,10 @@ public class PlayManager : MonoBehaviour
 
     void Update()
     {
-
+        if (!_playing)
+        {
+            return;
+        }
         txt_eggshells.text = eggShells.ToString();
         txt_eggsCracked.text = eggsCracked.ToString();
 
@@ -291,13 +188,129 @@ public class PlayManager : MonoBehaviour
 
 
 
-    void Start()
+   public void StartGame()
     {
+
         Initialise(null, 60);
     }
 
 
 
+    void ShowEnding(GameObject b)
+    {
+
+        b.SetActive(true);
+
+    }
+
+
+
+
+
+
+    public void Initialise(AudioClip clip, float bpm)
+    {
+        // AudioPlayer.Instance.player.clip = clip;
+        ///bpm = BPM;
+        BeatInterval = 60.0f / BPM / 2;
+        SubBeatInterval = BeatInterval / 2;
+        BeatCount = 0;
+        player.clip = beat;
+        _playing = true;
+   
+        InvokeRepeating("EveryBeat", 0, BeatInterval);
+        InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
+        pannedEgg = false;
+        eggy.GetNewEgg();
+        txt_eggName.text = eggy.currentEgg.ID;
+        txt_eggDesc.text = eggy.currentEgg.DESC;
+        hasMoved = true;
+        
+
+        ///InvokeRepeating("AfterSubBeat", 0, SubBeatInterval - Buffer);
+    }
+
+    IEnumerator DelayedRecolor(Image b, Color d)
+    {
+
+        b.color = d;
+        yield return new WaitForSecondsRealtime(0.2f);
+        b.color = Color.white;
+    }
+
+    void EveryBeat()
+    {
+        beatCycleIndicator[BeatsInThisCycle].enabled = true;
+        hasMoved = false;
+        player.Play();
+        BeatCount++;
+        BeatsInThisCycle++;
+
+        if (BeatsInThisCycle > beatsInCycle)
+        {
+            foreach (var item in beatCycleIndicator)
+            {
+                item.enabled = false;
+            }
+            BeatsInThisCycle = 0;
+            //throw egg in pan
+            if (!pannedEgg)
+            {
+                eggy.Pan();
+            }
+
+
+            pannedEgg = false;
+            eggy.GetNewEgg();
+            txt_eggName.text = eggy.currentEgg.ID;
+            txt_eggDesc.text = eggy.currentEgg.DESC;
+
+            hasMoved = true;
+        }
+        CheckVictoryCondition();
+        //Debug.Log("beat");
+    }
+
+    void EverySubBeat()
+    {
+        SubBeatCount++;
+        canMove = !canMove;
+        beatIndicator.gameObject.SetActive(!beatIndicator.gameObject.activeInHierarchy);
+        // Debug.Log("subBeat");
+
+    }
+
+
+
+    void CheckVictoryCondition()
+    {
+        if (eggsCracked >= 15)
+        {
+            CancelInvoke();
+
+            if (usedRotten)
+            {
+                ShowEnding(RottenEnding);
+                return;
+            }
+            if (eggShells == 0)
+            {
+                ShowEnding(GoodEnding);
+                return;
+            }
+            if (eggShells < 4)
+            {
+                ShowEnding(CrunchyEnding);
+                return;
+            }
+            if (eggShells > 4)
+            {
+                ShowEnding(BadEnding);
+                return;
+            }
+
+        }
+    }
 
 
 
