@@ -5,9 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeReference] PauseUI uiPause;
-    [SerializeReference] GameObject credits;
+    [SerializeReference] GameObject credits, howtoplay;
 
+    int logoClicked;
+    bool diff;
+    [SerializeReference] Material skyboxeasteregg;
+    Material regular;
+    [SerializeReference]AudioPlayer b;
+
+    void Start()
+    {
+        regular = RenderSettings.skybox;
+    }
+
+    public void OnClickLogo()
+    {
+        Debug.Log("click");
+        b.PlayEggcrack();
+        logoClicked++;
+        if (logoClicked > 6)
+        {
+            if (!diff)
+            {
+                RenderSettings.skybox = skyboxeasteregg;
+                
+            }
+            else
+            {
+                RenderSettings.skybox = regular;
+
+            }
+            diff = !diff;
+            logoClicked = 0;
+
+        }
+    }
 
     public void OnClickStart()
     {
@@ -16,7 +48,7 @@ public class MenuUI : MonoBehaviour
 
     public void OnClickOptions()
     {
-        //uiPause.PopUp();
+        howtoplay.SetActive(!howtoplay.activeInHierarchy);
     }
 
     public void OnClickCredits()

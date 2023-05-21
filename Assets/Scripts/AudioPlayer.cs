@@ -22,8 +22,9 @@ public class AudioPlayer : MonoBehaviour
         }
         else
         {
-            _instance = this;
             DontDestroyOnLoad(this);
+            _instance = this;
+           
         }
     }   
 
