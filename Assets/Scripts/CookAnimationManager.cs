@@ -17,7 +17,7 @@ public class CookAnimationManager : MonoBehaviour
     void Start()
     {
         RaisePan();
-       
+        animator.speed = 2;
     }
 
 

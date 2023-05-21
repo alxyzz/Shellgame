@@ -217,7 +217,7 @@ public class PlayManager : MonoBehaviour
     }
 
 
-
+    
 
 
    public void StartGame()
@@ -239,16 +239,9 @@ public class PlayManager : MonoBehaviour
 
 
 
-
-
-    public void Initialise(AudioClip clip, float bpm)
+    IEnumerator delayStart()
     {
-        // AudioPlayer.Instance.player.clip = clip;
-        ///bpm = BPM;
-        BeatInterval = 60.0f / BPM / 2;
-        SubBeatInterval = BeatInterval / 2;
-        BeatCount = 0;
-        player.clip = beat;
+        yield return new WaitForSecondsRealtime(5f);
         _playing = true;
         foreach (var item in beatCycleIndicator)
         {
@@ -257,12 +250,28 @@ public class PlayManager : MonoBehaviour
         InvokeRepeating("EveryBeat", 0, BeatInterval);
         InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
         pannedEgg = false;
-        eggy.GetNewEgg();
-      
+
+
         hasMoved = true;
-        
+
 
         ///InvokeRepeating("AfterSubBeat", 0, SubBeatInterval - Buffer);
+    }
+
+    public void Initialise(AudioClip clip, float bpm)
+    {
+
+
+        eggy.GetNewEgg();
+        HandController.Instance.cook.Idle();
+        // AudioPlayer.Instance.player.clip = clip;
+        ///bpm = BPM;
+        BeatInterval = 60.0f / BPM / 2;
+        SubBeatInterval = BeatInterval / 2;
+        BeatCount = 0;
+        player.clip = beat;
+        StartCoroutine(delayStart());
+       
     }
 
     IEnumerator DelayedRecolor(Image b, Color d)
