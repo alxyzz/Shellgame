@@ -28,6 +28,7 @@ public class PlayManager : MonoBehaviour
     //beat states
     public float BPM = 120;
     public float offset;
+    public int beatsInCycle;
     float BeatInterval;
     float SubBeatInterval;
     bool canMove = true;
@@ -72,8 +73,8 @@ public class PlayManager : MonoBehaviour
     {
         // AudioPlayer.Instance.player.clip = clip;
         ///bpm = BPM;
-        BeatInterval = 60.0f / BPM;
-        SubBeatInterval = BeatInterval / 4;
+        BeatInterval = 60.0f / BPM/2;
+        SubBeatInterval = BeatInterval / 2;
         BeatCount = 0;
         player.clip = beat;
 
@@ -105,7 +106,7 @@ public class PlayManager : MonoBehaviour
         BeatCount++;
         BeatsInThisCycle++;
 
-        if (BeatsInThisCycle > 5)
+        if (BeatsInThisCycle > beatsInCycle)
         {
             foreach (var item in beatCycleIndicator)
             {
