@@ -66,6 +66,12 @@ public class HandController : MonoBehaviour
         //target = PourPosition.transform.position;
     }
 
+    public void HandAnimate_LowerPan()
+    {
+        cook.LowerPan();
+        //target = PourPosition.transform.position;
+    }
+
 
     public void HandAnimate_Bin()
     {

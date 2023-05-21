@@ -51,6 +51,9 @@ public class MenuUI : MonoBehaviour
         
         play.StartGame();
         gameObject.SetActive(false);
+
+
+        HandController.Instance.HandAnimate_LowerPan();
     }
 
     public void OnClickLogo()

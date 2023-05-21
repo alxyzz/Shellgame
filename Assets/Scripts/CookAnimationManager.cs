@@ -16,9 +16,18 @@ public class CookAnimationManager : MonoBehaviour
 
     void Start()
     {
-
+        RaisePan();
+       
     }
 
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            Crack(true);
+        }
+    }
 
     public void Idle()
     {
