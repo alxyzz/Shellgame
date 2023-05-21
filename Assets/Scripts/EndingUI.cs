@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndingUI : MonoBehaviour
 {
@@ -70,7 +71,7 @@ public class EndingUI : MonoBehaviour
 
     public void OnClickPlayAgain()
     {
-        //restart scene
+        Scene scene = SceneManager.GetActiveScene(); SceneManager.LoadScene(scene.name);
     }
 
 

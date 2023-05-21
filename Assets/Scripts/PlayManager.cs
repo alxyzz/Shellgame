@@ -250,11 +250,7 @@ public class PlayManager : MonoBehaviour
         InvokeRepeating("EveryBeat", 0, BeatInterval);
         InvokeRepeating("EverySubBeat", offset, SubBeatInterval);
         pannedEgg = false;
-
-
         hasMoved = true;
-
-
         ///InvokeRepeating("AfterSubBeat", 0, SubBeatInterval - Buffer);
     }
 
@@ -285,7 +281,7 @@ public class PlayManager : MonoBehaviour
     void EveryBeat()
     {
         beatCycleIndicator[BeatsInThisCycle].enabled = true;
-        hasMoved = false;
+      
         player.Play();
         BeatCount++;
         BeatsInThisCycle++;
@@ -316,6 +312,7 @@ public class PlayManager : MonoBehaviour
 
     void EverySubBeat()
     {
+        hasMoved = false;
         SubBeatCount++;
         canMove = !canMove;
         beatIndicator.gameObject.SetActive(!beatIndicator.gameObject.activeInHierarchy);

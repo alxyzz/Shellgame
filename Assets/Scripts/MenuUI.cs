@@ -37,6 +37,8 @@ public class MenuUI : MonoBehaviour
         {
             StartGame();
         }
+        HandController.Instance.cook.RaisePan();
+
     }
 
     void StartGame()
@@ -51,7 +53,6 @@ public class MenuUI : MonoBehaviour
         
         play.StartGame();
         gameObject.SetActive(false);
-
 
         HandController.Instance.HandAnimate_LowerPan();
     }
