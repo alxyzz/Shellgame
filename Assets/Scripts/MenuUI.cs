@@ -9,7 +9,8 @@ public class MenuUI : MonoBehaviour
 
 
     [SerializeReference] PlayManager play;
-    [SerializeReference] GameObject credits, howtoplay, PlayCanvas;
+    [SerializeReference] GameObject credits, howtoplay, PlayCanvas, endings;
+    [SerializeReference]  List<GameObject> playObjects = new(); //hide these when start, show when playing
     int logoClicked;
     bool diff;
     [SerializeReference] Material skyboxeasteregg;
@@ -20,13 +21,20 @@ public class MenuUI : MonoBehaviour
     {
         regular = RenderSettings.skybox;
         PlayCanvas.SetActive(false);
-
+        foreach (var item in playObjects)
+        {
+            item.SetActive(false);
+        }
     }
-
 
 
     void StartGame()
     {
+        foreach (var item in playObjects)
+        { //just so we dont have to deactivate them all the time in the editor
+            item.SetActive(true);
+        }
+        endings.SetActive(false);
         PlayCanvas.SetActive(true);
         play.StartGame();
         gameObject.SetActive(false);
@@ -75,10 +83,7 @@ public class MenuUI : MonoBehaviour
         Application.Quit();
     }
 
-    public void OnClickControls()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
-    }
+ 
 
 
 
