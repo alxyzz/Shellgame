@@ -50,6 +50,7 @@ Shader "Custom/SH_CompactPBR"
             o.Metallic = data.metallic;
             o.Smoothness = data.smoothness;
             o.Occlusion = data.ambientOcclusion;
+            o.Normal = data.normal;
             o.Alpha = 1;
         }
         ENDCG
