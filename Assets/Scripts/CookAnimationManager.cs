@@ -23,10 +23,10 @@ public class CookAnimationManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            Crack(true);
-        }
+        //if (Input.GetKeyDown(KeyCode.RightArrow))
+        //{
+        //    Crack(true);
+        //}
     }
 
     public void Idle()

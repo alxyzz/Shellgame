@@ -25,7 +25,7 @@ public class EndingUI : MonoBehaviour
         endingPlayer.mute = false;
 
 
-
+        gameObject.SetActive(true);
     }
 
 
@@ -51,6 +51,7 @@ public class EndingUI : MonoBehaviour
     }
     public void DoRottenEnding()
     {
+
         DoGeneralEndingStuff();
         StartCoroutine(ending(rottenEnding));
     }
