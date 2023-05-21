@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour
     #endregion
     #region Variables
 
-    List<Player> players = new();
-
     [SerializeField] public float timeToStart = 2;
     [Header("This is the time per each subdivision - a turn is two of these.")]
     [SerializeField] public  float processInterval = 0.7f; 
