@@ -30,6 +30,7 @@ public class MenuUI : MonoBehaviour
         menuMusic.clip = menuMusicClip;
         menuMusic.loop = true;
         menuMusic.Play();
+        HandController.Instance.cook.RaisePan();
     }
     void Update()
     {
@@ -37,7 +38,7 @@ public class MenuUI : MonoBehaviour
         {
             StartGame();
         }
-        HandController.Instance.cook.RaisePan();
+        
 
     }
 
