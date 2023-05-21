@@ -19,18 +19,20 @@ public class CookAnimationManager : MonoBehaviour
     }
     public void GetEgg()
     {
-        animator.SetTrigger("Get");
+        Debug.Log("Animating GetEgg right now."); animator.SetTrigger("Get");
     }
     public void LiftEgg()
     {
-        animator.SetTrigger("Lift");
+        Debug.Log("Animating LiftEgg right now."); animator.SetTrigger("Lift");
     }
     public void Smack(bool success)
     {
+        Debug.Log("Animating Smack right now.");
         animator.SetTrigger(success? "Smack" : "SmackTooHard");
     }
     public void Crack(bool success)
     {
+        Debug.Log("Animating Crack right now.");
         animator.SetBool("CrackSuccess", success);
         animator.SetTrigger("Crack");
     }

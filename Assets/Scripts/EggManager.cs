@@ -20,10 +20,13 @@ public class EggManager : MonoBehaviour
 
         currentEgg = Instantiate(eggPrefabs[Random.Range(0, eggPrefabs.Count)], HandController.Instance.eggSpawner.transform).GetComponent<Egg>();
         HandController.Instance.InitiateEggInTheDarkArts((currentEgg.bottomPart, currentEgg.upperPart));
+
+       
     }
 
     void DisposeOfEgg()
     {
+
         Debug.Log("Just disposed of an egg.");
         currentEgg.gameObject.SetActive(false);
 
@@ -34,6 +37,7 @@ public class EggManager : MonoBehaviour
         currentEgg = null;
 
 
+        HandController.Instance.cook.Idle();
 
 
     }

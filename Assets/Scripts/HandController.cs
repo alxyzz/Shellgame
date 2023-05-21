@@ -40,6 +40,7 @@ public class HandController : MonoBehaviour
 
     public void InitiateEggInTheDarkArts((GameObject, GameObject) bottomupperpart)
     {
+        HandAnimate_GetEgg();
         bottomupperpart.Item1.transform.SetParent(egg_bottom_part.transform);
         bottomupperpart.Item2.transform.SetParent(egg_top_part.transform);
     }
@@ -48,6 +49,12 @@ public class HandController : MonoBehaviour
     public void HandAnimate_Crack(bool success)
     {
         cook.Smack(success);
+
+    }
+
+    public void HandAnimate_GetEgg()
+    {
+        cook.GetEgg();
 
     }
 
