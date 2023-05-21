@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
-    [SerializeReference] GameObject credits, howtoplay;
 
+
+
+    [SerializeReference] PlayManager play;
+    [SerializeReference] GameObject credits, howtoplay, PlayCanvas;
     int logoClicked;
     bool diff;
     [SerializeReference] Material skyboxeasteregg;
@@ -16,6 +19,17 @@ public class MenuUI : MonoBehaviour
     void Start()
     {
         regular = RenderSettings.skybox;
+        PlayCanvas.SetActive(false);
+
+    }
+
+
+
+    void StartGame()
+    {
+        PlayCanvas.SetActive(true);
+        play.StartGame();
+        gameObject.SetActive(false);
     }
 
     public void OnClickLogo()
@@ -43,7 +57,7 @@ public class MenuUI : MonoBehaviour
 
     public void OnClickStart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        StartGame();
     }
 
     public void OnClickOptions()
