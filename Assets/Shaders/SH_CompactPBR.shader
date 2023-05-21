@@ -6,6 +6,7 @@ Shader "Custom/SH_CompactPBR"
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _MRATex ("MRA Map", 2D) = "gray" {}
         _NormalTex ("Normal Map", 2D) = "bump" {}
+        _EmissiveTex ("Emissive Map", 2D) = "black" {}
     }
     
     CustomEditor "PBRShaderGUI"
@@ -31,6 +32,7 @@ Shader "Custom/SH_CompactPBR"
 
         sampler2D _MRATex;
         sampler2D _NormalTex;
+        sampler2D _EmissiveTex;
 
         #include "SHF_Common.cginc"
 
@@ -44,13 +46,15 @@ Shader "Custom/SH_CompactPBR"
         void surf (Input IN, inout SurfaceOutputStandard o)
         {
             // Albedo comes from a texture tinted by color
-            PBRData data = unpackPBR(_MainTex, _MRATex, _NormalTex, IN.uv_MainTex);
+            float3 emission = tex2D(_EmissiveTex, IN.uv_MainTex);
+            PBRData data = unpackPBR(_MainTex, _MRATex, _NormalTex, emission, IN.uv_MainTex);
             o.Albedo = data.albedo;
             // Metallic and smoothness come from slider variables
             o.Metallic = data.metallic;
             o.Smoothness = data.smoothness;
             o.Occlusion = data.ambientOcclusion;
             o.Normal = data.normal;
+            o.Emission = data.emission;
             o.Alpha = 1;
         }
         ENDCG
