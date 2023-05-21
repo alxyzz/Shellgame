@@ -14,21 +14,22 @@ public class EggManager : MonoBehaviour
 
     public AudioSource player;
     [SerializeReference] List<GameObject> eggPrefabs = new();
-    [SerializeReference] GameObject eggSpawnerObject;
 
     public void GetNewEgg()
     {
 
-        currentEgg = Instantiate(eggPrefabs[Random.Range(0, eggPrefabs.Count)], eggSpawnerObject.transform).GetComponent<Egg>();
-
+        currentEgg = Instantiate(eggPrefabs[Random.Range(0, eggPrefabs.Count)], HandController.Instance.eggSpawner.transform).GetComponent<Egg>();
+        HandController.Instance.InitiateEggInTheDarkArts((currentEgg.bottomPart, currentEgg.upperPart));
     }
 
     void DisposeOfEgg()
     {
         Debug.Log("Just disposed of an egg.");
         currentEgg.gameObject.SetActive(false);
-        
-        Destroy(currentEgg.gameObject);
+
+        Destroy(currentEgg.upperPart);
+        Destroy(currentEgg.bottomPart);
+        Destroy(currentEgg);
 
         currentEgg = null;
 
@@ -48,27 +49,29 @@ public class EggManager : MonoBehaviour
             
             return;
         }
-        HandController.Instance.HandAnimate_Pan();
+       
         switch (currentEgg._state)
         {
             case Egg.EggState.Intact:
                 PlayManager.Instance.eggShells += 1;
                 PlayManager.Instance.eggsCracked++;
                 PlayManager.Instance.PopUpWrong();
-                break;
+                HandController.Instance.HandAnimate_Pan(false); break;
             case Egg.EggState.Rotten:
                 PlayManager.Instance.eggsCracked++;
                 player.PlayOneShot(RottenEggSound);
+                HandController.Instance.HandAnimate_Pan(false);
                 PlayManager.Instance.PopUpWrong(); PlayManager.Instance.usedRotten = true; break;
             case Egg.EggState.Cracked:
                 PlayManager.Instance.eggsCracked++;
                 PlayManager.Instance.PopUpCorrect();
+                HandController.Instance.HandAnimate_Pan(true);
                 break;
             case Egg.EggState.Shattered:
                 PlayManager.Instance.eggsCracked++;
                 PlayManager.Instance.eggShells += 1;
                 PlayManager.Instance.PopUpWrong();
-                break;
+                HandController.Instance.HandAnimate_Pan(false); break;
             default:
                 break;
         }
@@ -102,10 +105,9 @@ public class EggManager : MonoBehaviour
             PlayManager.Instance.PopUpCorrect();
 
         }
-       // PlayManager.Instance.PopUpWrong();
-        HandController.Instance.HandAnimate_Bin();
+       
         player.PlayOneShot(GarbageSound);
-
+        HandController.Instance.HandAnimate_Bin();
         DisposeOfEgg();
     }
 
@@ -113,7 +115,7 @@ public class EggManager : MonoBehaviour
     {
         if (currentEgg != null)
         {
-            HandController.Instance.HandAnimate_Crack();
+           
            
 
             //all done here
@@ -122,18 +124,22 @@ public class EggManager : MonoBehaviour
                 case Egg.EggState.Intact:
                     IntactEggFeedback();
                     PlayManager.Instance.PopUpWrong();
+                    HandController.Instance.HandAnimate_Crack(false);
                     break;
                 case Egg.EggState.Rotten:
                     PlayManager.Instance.PopUpWrong();
+                    HandController.Instance.HandAnimate_Crack(false);
                     RottenEggFeedback();
                     break;
                 case Egg.EggState.Cracked:
                     PlayManager.Instance.PopUpCrack();
+                    HandController.Instance.HandAnimate_Crack(true);
                     CrackEggFeedback();
                     //play crack sound
                     break;
                 case Egg.EggState.Shattered:
                     PlayManager.Instance.PopUpWrong();
+                    HandController.Instance.HandAnimate_Crack(false);
                     ShatterEggFeedback();
                     //play loud crack sound
                     break;

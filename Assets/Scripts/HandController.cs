@@ -29,43 +29,31 @@ public class HandController : MonoBehaviour
     }
 
 
-    [SerializeField] float lerpSpeed = 2f;
-    Vector3 startPos;
-    Vector3 target;
-    float lerpfactor;
+    [SerializeField] float animSpeed = 1f;
 
     //for now
 
-    public GameObject pos_crack, pos_raise, pos_raise2, pos_garbage, pos_pan;
-    public GameObject THE_HAND;
+    public CookAnimationManager cook;
+    public GameObject egg_bottom_part, egg_top_part, eggSpawner;
 
-     Vector3 OrigPos;
-    void AnimateCookHand(GameObject a, GameObject b)
+
+
+    public void InitiateEggInTheDarkArts((GameObject, GameObject) bottomupperpart)
     {
-        StopAllCoroutines();
-        a.transform.position = b.transform.position;
-        StartCoroutine(returnToRestingPlace());
-
+        bottomupperpart.Item1.transform.SetParent(egg_bottom_part.transform);
+        bottomupperpart.Item2.transform.SetParent(egg_top_part.transform);
     }
 
-
-    IEnumerator returnToRestingPlace()
+   
+    public void HandAnimate_Crack(bool success)
     {
-        yield return new WaitForSecondsRealtime(0.4f);
+        cook.Smack(success);
 
-        THE_HAND.transform.position = startPos;
-
-
-    }
-    public void HandAnimate_Crack()
-    {
-        AnimateCookHand(THE_HAND, pos_crack);
-        
     }
 
     public void HandAnimate_Raise()
     {
-        AnimateCookHand(THE_HAND, pos_raise);
+        cook.LiftEgg();
 
 
         //target = PourPosition.transform.position;
@@ -74,27 +62,17 @@ public class HandController : MonoBehaviour
 
     public void HandAnimate_Bin()
     {
-        AnimateCookHand(THE_HAND, pos_garbage);
+        //cook.Garbage(success);
 
 
         //target = BinPosition.transform.position;
     }
 
-    public void HandAnimate_Pan()
+    public void HandAnimate_Pan(bool success)
     {
-        AnimateCookHand(THE_HAND, pos_pan);
+        cook.Crack(success);
         //target = PanPosition.transform.position;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-       
-      
-    }
-
-    void FixedUpdate()
-    {
-      
-    }
+    
 }

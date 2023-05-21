@@ -8,12 +8,28 @@ public enum Movement { crack, pour, none }
 /// </summary>
 public class Egg : MonoBehaviour
 {
+
+
+
+
+
     public enum EggState
     {
         Intact,//crack, pour
         Rotten,//just dispose
         Cracked,//can pour
         Shattered
+    }
+
+    [SerializeReference] public GameObject bottomPart, upperPart;
+
+    /// <summary>
+    /// returns bottompart and upperpart
+    /// </summary>
+    /// <returns></returns>
+    public (GameObject, GameObject) ReturnParts()
+    {
+        return (bottomPart, upperPart);
     }
 
     public EggState _state;
