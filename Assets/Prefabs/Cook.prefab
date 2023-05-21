@@ -49,6 +49,7 @@ MonoBehaviour:
   Egg: {fileID: 2906491560107299518}
   TopShell: {fileID: 4661938919796431220}
   BottomShell: {fileID: 7909737456797302024}
+  Head: {fileID: 8521035629424420618}
 --- !u!1001 &1896747072890147431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -149,5 +150,10 @@ Transform:
 --- !u!4 &7909737456797302024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8617516008273358703, guid: fc3ec45af0bb0f4409dec082377fee4b, type: 3}
+  m_PrefabInstance: {fileID: 1896747072890147431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8521035629424420618 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -1435991134388406931, guid: fc3ec45af0bb0f4409dec082377fee4b, type: 3}
   m_PrefabInstance: {fileID: 1896747072890147431}
   m_PrefabAsset: {fileID: 0}
