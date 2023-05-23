@@ -7,9 +7,10 @@ Shader "Custom/SH_CompactPBR"
         _MRATex ("MRA Map", 2D) = "gray" {}
         _NormalTex ("Normal Map", 2D) = "bump" {}
         _EmissiveTex ("Emissive Map", 2D) = "black" {}
+        _EmissiveStrength ("Emissive Strength", Float) = 1
     }
     
-    CustomEditor "PBRShaderGUI"
+    CustomEditor "CompactPBRGUI"
     
     SubShader
     {
@@ -33,6 +34,7 @@ Shader "Custom/SH_CompactPBR"
         sampler2D _MRATex;
         sampler2D _NormalTex;
         sampler2D _EmissiveTex;
+        float _EmissiveStrength;
 
         #include "SHF_Common.cginc"
 
@@ -54,7 +56,7 @@ Shader "Custom/SH_CompactPBR"
             o.Smoothness = data.smoothness;
             o.Occlusion = data.ambientOcclusion;
             o.Normal = data.normal;
-            o.Emission = data.emission;
+            o.Emission = data.emission * _EmissiveStrength;
             o.Alpha = 1;
         }
         ENDCG

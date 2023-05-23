@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 public enum CookAnimationState
 {
@@ -24,7 +25,7 @@ public class CookAnimationManager : MonoBehaviour
     public Transform Head;
 
     public UnityEvent onPanRaise;
-    public UnityEvent onPanLower;
+    public UnityEvent onPanLowered;
     
     private CookAnimationState _state;
 

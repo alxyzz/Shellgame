@@ -12,7 +12,7 @@ public class BeatKeeper : MonoBehaviour
     public AudioClip clickSound;
     public int beatsPerMinute;
     public UnityEvent<int> onBeat;
-
+    public UnityEvent songEnd;
     public float Frequency => 60f / beatsPerMinute;
     [Range(0, 1)] public float leniency = 0.5f;
     public bool IsPlaying => _isPlaying;
@@ -24,7 +24,7 @@ public class BeatKeeper : MonoBehaviour
     private float _prevFrac;
     private bool _isPlaying;
     private int _beatCounter;
-    
+    public int finalBeat;
     private float GetTrackTime()
     {
         return (float)(AudioSettings.dspTime - _startTime);
@@ -33,7 +33,14 @@ public class BeatKeeper : MonoBehaviour
     private void OnBeat()
     {
         onBeat.Invoke(_beatCounter);
+        if (_beatCounter >= finalBeat)
+        {
+            StopBeat();
+            songEnd.Invoke();
+        }
+
         _beatCounter++;
+        
     }
 
     private void Awake()
@@ -71,7 +78,6 @@ public class BeatKeeper : MonoBehaviour
 
     public void StartBeat()
     {
-        Debug.Log("Start Beat yo");
         _isPlaying = true;
         _startTime = AudioSettings.dspTime;
         _audioSource.PlayOneShot(musicClip);
@@ -81,7 +87,6 @@ public class BeatKeeper : MonoBehaviour
 
     public void StopBeat()
     {
-        Debug.Log("Stop beat yo");
         _isPlaying = false;
         _audioSource.Stop();
     }

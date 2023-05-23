@@ -15,4 +15,4 @@ MonoBehaviour:
   isRotten: 0
   raises: 2
   smacks: 1
-  model: {fileID: 2173439841851164959, guid: 4ab49f641c728d444b5d7a35c7c84253, type: 3}
+  model: {fileID: 2417145616664360696, guid: bdda08959e0eb4d4d91d84020b02ef97, type: 3}

@@ -13,7 +13,7 @@ public class PanAnim : MonoBehaviour
     private void Start()
     {
         cookManager.onPanRaise.AddListener(() => _isControlled = true);
-        cookManager.onPanLower.AddListener(() => _isControlled = false);
+        cookManager.onPanLowered.AddListener(() => _isControlled = false);
     }
 
     private void Update()

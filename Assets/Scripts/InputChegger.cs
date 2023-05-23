@@ -16,11 +16,11 @@ public enum EggProcessState
 
 public class InputChegger : MonoBehaviour
 {
-    public BeatKeeper beatKeeper;
     public List<EggType> eggs;
 
     private EggProcessState _state = EggProcessState.None;
     public EggProcessState State => _state;
+    public BeatKeeper BeatKeeper => GameManager.Instance.beatKeeper;
     
     private EggType _egg;
     private int _currentRaises;
@@ -31,13 +31,13 @@ public class InputChegger : MonoBehaviour
     public UnityEvent onRaiseEgg;
     public UnityEvent onSmackEggCorrect;
     public UnityEvent onSmackEggWrong;
-    public UnityEvent onCrackEgg;
+    public UnityEvent<EggType> onCrackEgg;
     public UnityEvent onDiscardEgg;
-    public UnityEvent onWeakCrackEgg;
+    public UnityEvent<EggType> onWeakCrackEgg;
 
     private void Start()
     {
-        beatKeeper.onBeat.AddListener((_) => _beatUsed = false);
+        BeatKeeper.onBeat.AddListener((_) => _beatUsed = false);
     }
 
     public void TakeEgg(EggType egg)
@@ -45,14 +45,14 @@ public class InputChegger : MonoBehaviour
         
         if (State is not EggProcessState.None)
         {
-            Debug.Log("Already egg there yo.");
+            // Debug.Log("Already egg there yo.");
             return;
         }
         _egg = egg;
         _currentRaises = 0;
         _currentSmacks = 0;
         _state = EggProcessState.Taken;
-        Debug.Log($"Starting Process. Current Egg: {egg.name}");
+        // Debug.Log($"Starting Process. Current Egg: {egg.name}");
         onTakeEgg.Invoke(egg);
     }
 
@@ -95,9 +95,9 @@ public class InputChegger : MonoBehaviour
             return;
         }
         
-        if (_egg.isRotten) Debug.Log("Yuckies");
+        // if (_egg.isRotten) Debug.Log("Yuckies");
         ///else Debug.Log("Yummies");
-        onCrackEgg.Invoke();
+        onCrackEgg.Invoke(_egg);
         EndProcess();
     }
 
@@ -110,8 +110,8 @@ public class InputChegger : MonoBehaviour
 
     private void CrackFailed()
     {
-        Debug.Log("Not enough force");
-        onWeakCrackEgg.Invoke();
+        // Debug.Log("Not enough force");
+        onWeakCrackEgg.Invoke(_egg);
         EndProcess();
     }
 
@@ -124,8 +124,8 @@ public class InputChegger : MonoBehaviour
     
     public void PerformAction(int index)
     {
-        var score = beatKeeper.ValidateInput();
-        if (score < beatKeeper.leniency) return;
+        var score = BeatKeeper.ValidateInput();
+        if (score < BeatKeeper.leniency) return;
         _beatUsed = true; //TODO maybe get working properly
         if (State == EggProcessState.None)
         {
@@ -163,16 +163,18 @@ public class InputChegger : MonoBehaviour
         {
             DiscardEgg();
         }
-            ///
-            /// .Log($"State: {State}, Raises:{_currentRaises}, Smacks: {_currentSmacks}");
+        /// .Log($"State: {State}, Raises:{_currentRaises}, Smacks: {_currentSmacks}");
     }
 
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.LeftArrow)) TakeEgg(eggs[Random.Range(0, eggs.Count)]);
-        
-        if(Input.GetKeyDown(KeyCode.UpArrow)) PerformAction(index: 0);
-        if(Input.GetKeyDown(KeyCode.DownArrow)) PerformAction(index : 1);
-        if(Input.GetKeyDown(KeyCode.RightArrow)) PerformAction(index: 2);
+
+        if (!_beatUsed)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow)) PerformAction(index: 0);
+            if (Input.GetKeyDown(KeyCode.DownArrow)) PerformAction(index: 1);
+            if (Input.GetKeyDown(KeyCode.RightArrow)) PerformAction(index: 2);
+        }
     }
 }

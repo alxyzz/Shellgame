@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4845621757718206321}
+  - component: {fileID: 3564596556022573548}
   m_Layer: 0
   m_Name: Stove
   m_TagString: Untagged
@@ -32,6 +33,89 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3564596556022573548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6343267229615373743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 748760af81a748c47956f6e077a07deb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelRenderer: {fileID: 6484674254623897160}
+  remapping:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.9999832
+      inSlope: 0.00032600452
+      outSlope: 0.00032600452
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.40311006
+    - serializedVersion: 3
+      time: 0.05002194
+      value: 0.99839956
+      inSlope: -0.039616447
+      outSlope: -7.0970244
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.3258332
+      outWeight: 0.031782493
+    - serializedVersion: 3
+      time: 0.053714864
+      value: 0.6096512
+      inSlope: -5.394834
+      outSlope: -2.9537597
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.04798438
+    - serializedVersion: 3
+      time: 0.50054574
+      value: 0.1719349
+      inSlope: -0.098240286
+      outSlope: -0.098240286
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.093535915
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.94459885
+      value: 0.56919694
+      inSlope: 2.5840752
+      outSlope: 3.7147381
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.06397658
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.94995284
+      value: 1.0019444
+      inSlope: 5.7055
+      outSlope: -0.04352566
+      tangentMode: 1
+      weightedMode: 0
+      inWeight: 0.037920244
+      outWeight: 0.43053484
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.0715674
+      outSlope: 0.0715674
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28207928
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  multiplier: 2
 --- !u!1001 &5638406958229285580
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,5 +184,10 @@ PrefabInstance:
 --- !u!4 &5311182380565105959 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: be9a71b29074121458f7f3aeae57ca67, type: 3}
+  m_PrefabInstance: {fileID: 5638406958229285580}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &6484674254623897160 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: be9a71b29074121458f7f3aeae57ca67, type: 3}
   m_PrefabInstance: {fileID: 5638406958229285580}
   m_PrefabAsset: {fileID: 0}
