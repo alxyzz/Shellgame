@@ -315,7 +315,7 @@ public class PlayManager : MonoBehaviour
         hasMoved = false;
         SubBeatCount++;
         canMove = !canMove;
-        beatIndicator.gameObject.SetActive(!beatIndicator.gameObject.activeInHierarchy);
+        beatIndicator.gameObject.SetActive(true);
         // Debug.Log("subBeat");
 
     }

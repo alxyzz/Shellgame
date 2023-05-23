@@ -9,4 +9,5 @@ public class EggType : ScriptableObject
     public bool isRotten;
     public int raises;
     public int smacks;
+    public EggModel model;
 }

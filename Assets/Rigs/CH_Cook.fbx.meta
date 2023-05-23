@@ -277,7 +277,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.88284206
+        functionName: DestroyEgg
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 2aa2b45b731269942ba4e9abf8e58b75, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -306,7 +313,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.8412547
+        functionName: DestroyEgg
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 2aa2b45b731269942ba4e9abf8e58b75, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -451,7 +465,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.4304611
+        functionName: DestroyEgg
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 2aa2b45b731269942ba4e9abf8e58b75, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

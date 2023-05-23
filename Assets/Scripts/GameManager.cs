@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    #region Singleton
+    public InputChegger inputChegger;
+    public CookAnimationManager cookAnimationManager;
+    public BeatKeeper beatKeeper;
+    public Transform camera;
+    public Transform pan;
 
+    private bool _panRaised;
+    private EggModel _currentVisualEgg;
 
     private static GameManager _instance;
     public static GameManager Instance { get { return _instance; } }
-
-
 
     void Awake()
     {
@@ -26,79 +29,60 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(this);
         }
     }
-    #endregion
-    #region References
-    [HideInInspector] public PlayManager pManager;
 
-    #endregion
-    #region Variables
-
-    [SerializeField] public float timeToStart = 2;
-    [Header("This is the time per each subdivision - a turn is two of these.")]
-
-    //settings
-    [HideInInspector] public float musicVolume;
-    [HideInInspector] public float SFXvolume;
-
-
-    #endregion
-    #region Unity Native
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
+        inputChegger.onTakeEgg.AddListener(OnTakeEgg);
+        inputChegger.onRaiseEgg.AddListener(cookAnimationManager.LiftEgg);
+        inputChegger.onSmackEggCorrect.AddListener(() => cookAnimationManager.Smack(true));
+        inputChegger.onSmackEggWrong.AddListener(() => cookAnimationManager.Smack(false));
+        inputChegger.onCrackEgg.AddListener(() => cookAnimationManager.Crack(true));
+        inputChegger.onWeakCrackEgg.AddListener(() => cookAnimationManager.Crack(false));
+        inputChegger.onDiscardEgg.AddListener(cookAnimationManager.Idle);
+        cookAnimationManager.onPanRaise.AddListener(() => _panRaised = true);
+        cookAnimationManager.onPanLower.AddListener(() => _panRaised = false);
 
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Escape))
-        //{
-        //    TogglePauseMenu();
-        //}
+        CopyTransforms(cookAnimationManager.Head, camera);
+
+        if (_panRaised) 
+            CopyTransforms(cookAnimationManager.Egg, pan, switchAxes: true);
+        if (_currentVisualEgg is not null)
+            _currentVisualEgg.UpdateTransforms(cookAnimationManager);
+
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(_panRaised)
+            cookAnimationManager.LowerPan();
+            else
+            {
+                cookAnimationManager.RaisePan();
+            }
+        }
+
     }
 
-    #endregion
-    #region Scene Management
-
-    public void SceneAdvance()
+    public static void CopyTransforms(Transform source, Transform target, bool switchAxes = false)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-  
-
-
-    public void GotoMenu()
-    {
-        SceneManager.LoadScene(0);
+        target.position = source.position;
+        if (switchAxes) target.rotation = Quaternion.LookRotation(-source.up, source.forward);
+        else target.rotation = Quaternion.LookRotation(source.forward, source.up);
     }
 
-    #endregion
-    #region PauseMenu
-    //public void TogglePauseMenu() 
-    //{
+    private void OnTakeEgg(EggType egg)
+    {
+        DestroyEgg();
+        _currentVisualEgg = Instantiate(egg.model);
+        cookAnimationManager.GetEgg();
+    }
 
-    //    if (pause.gameObject.activeInHierarchy)
-    //    {
-    //        Time.timeScale = 1f;
-
-    //        pause.gameObject.SetActive(false);
-    //    }
-    //    else
-    //    {
-    //        Time.timeScale = 0f;
-    //        pause.gameObject.SetActive(true);
-
-    //    }
-
-    //}
-
-
-    #endregion
-
-
-
-
-
-
+    public void DestroyEgg()
+    {
+        if (_currentVisualEgg is null) return;
+        Destroy(_currentVisualEgg.gameObject);
+        _currentVisualEgg = null;
+    }
 }

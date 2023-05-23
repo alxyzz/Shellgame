@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicClip: {fileID: 8300000, guid: ed1c55034b85f51439bd24f7a50bf6c4, type: 3}
   clickSound: {fileID: 8300000, guid: ce79816ccd60438408f64d3c2f9d9c7a, type: 3}
-  beatsPerMinute: 60
+  beatsPerMinute: 120
   onBeat:
     m_PersistentCalls:
       m_Calls: []

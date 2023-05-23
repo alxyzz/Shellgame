@@ -42,28 +42,32 @@ public class CookAnimationManager : MonoBehaviour
     }
     public void GetEgg()
     {
+        ///Debug.Log($"trying to get egg {_state}");
         if (!(_state is CookAnimationState.Idle or CookAnimationState.Crack)) return;
         _state = CookAnimationState.Get;
-        Debug.Log("Animating GetEgg right now."); animator.SetTrigger("Get");
+        ///Debug.Log("Animating GetEgg right now."); 
+        animator.SetTrigger("Get");
     }
     public void LiftEgg()
     {
-        if (_state is not CookAnimationState.Get) return;
+        if (!(_state is CookAnimationState.Get || _state is CookAnimationState.Lift)) return;
         _state = CookAnimationState.Lift;
-        Debug.Log("Animating LiftEgg right now."); animator.SetTrigger("Lift");
+        ///Debug.Log("Animating LiftEgg right now."); 
+        animator.SetTrigger("Lift");
     }
     public void Smack(bool success)
     {
-        if (_state is not CookAnimationState.Lift) return;
+        if (!(_state is CookAnimationState.Lift || _state is CookAnimationState.Smack)) return;
         _state = CookAnimationState.Smack;
-        Debug.Log("Animating Smack right now.");
+        ///Debug.Log("Animating Smack right now.");
         animator.SetTrigger(success? "Smack" : "SmackTooHard");
+        if (!success) _state = CookAnimationState.Idle;
     }
     public void Crack(bool success)
     {
         if (_state is not CookAnimationState.Smack) return;
         _state = CookAnimationState.Crack;
-        Debug.Log("Animating Crack right now.");
+        ///Debug.Log("Animating Crack right now.");
         animator.SetBool("CrackSuccess", success);
         animator.SetTrigger("Crack");
     }
@@ -79,7 +83,6 @@ public class CookAnimationManager : MonoBehaviour
     {
         if (_state is not CookAnimationState.Menu) return;
         _state = CookAnimationState.Idle;
-        onPanLower.Invoke();
         animator.SetBool("ShowMenu", false);
     }
 
