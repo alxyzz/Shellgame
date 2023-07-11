@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,18 +63,21 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if(_panState is PanState.Raised) cookAnimationManager.LowerPan();
+            else if(_panState is PanState.Lowered) cookAnimationManager.RaisePan();
+        }
+    }
+
+    private void LateUpdate()
+    {
         CopyTransforms(cookAnimationManager.Head, mainCamera);
 
         if (_panState is not PanState.Lowered) 
             CopyTransforms(cookAnimationManager.Egg, pan, switchAxes: true);
         if (_currentVisualEgg is not null)
             _currentVisualEgg.UpdateTransforms(cookAnimationManager);
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if(_panState is PanState.Raised) cookAnimationManager.LowerPan();
-            else if(_panState is PanState.Lowered) cookAnimationManager.RaisePan();
-        }
     }
 
     public static void CopyTransforms(Transform source, Transform target, bool switchAxes = false)
