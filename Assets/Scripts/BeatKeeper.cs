@@ -50,6 +50,12 @@ public class BeatKeeper : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            CreateLagSpike(9999999);
+        }
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (_isPlaying) StopBeat();
@@ -101,5 +107,14 @@ public class BeatKeeper : MonoBehaviour
     public int GetNearestBeat()
     {
         return _beatCounter + Mathf.RoundToInt(BeatFrac) - 1;
+    }
+
+    private void CreateLagSpike(int iterations)
+    {
+        Debug.Log("Creating Lag Spike");
+        for (int i = 0; i < iterations; i++)
+        {
+            Vector3 lag = new Vector3(Mathf.Sin(i), Mathf.Cos(i), Mathf.Tan(i));
+        }
     }
 }
