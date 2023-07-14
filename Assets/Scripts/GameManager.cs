@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
         else target.rotation = Quaternion.LookRotation(source.forward, source.up);
     }
 
-    private void OnTakeEgg(EggType egg)
+    public void OnTakeEgg(EggType egg)
     {
         DestroyEgg();
         _currentVisualEgg = Instantiate(egg.model);
